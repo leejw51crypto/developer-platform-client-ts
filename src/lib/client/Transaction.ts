@@ -1,0 +1,75 @@
+import { ApiResponse } from '../../integrations/api.interfaces.js';
+import {
+  getTransactionsByAddress,
+  getTransactionByHash,
+  getTransactionStatus,
+} from '../../integrations/transaction.api.js';
+import { Client } from './Client.js';
+
+/**
+ * Transaction class handles operations related to fetching transaction data,
+ * such as fetching transactions by address, by hash, getting transaction status, and fetching block data.
+ *
+ * @class
+ */
+export class Transaction {
+  /**
+   * Fetches transactions for a specific wallet address.
+   *
+   * @async
+   * @param {string} address - The wallet address to fetch transactions for.
+   * @param {string} [session] - Optional. Session token for pagination (default is an empty string).
+   * @param {string} [limit] - Optional. Limit for the number of transactions to fetch (default is 20).
+   * @returns {Promise<ApiResponse>} - A promise that resolves to the transaction data for the specified address.
+   * @throws {Error} - Throws an error if the request fails.
+   *
+   * @example
+   * const transactions = await Transaction.getTransactionsByAddress('0x...');
+   * console.log(transactions);
+   */
+  public static async getTransactionsByAddress(
+    address: string,
+    session?: string,
+    limit?: string
+  ): Promise<ApiResponse> {
+    const chainId = Client.getChainId();
+    const apiKey = Client.getApiKey();
+    return await getTransactionsByAddress(chainId, address, session, limit, apiKey);
+  }
+
+  /**
+   * Fetches a transaction by its hash.
+   *
+   * @async
+   * @param {string} txHash - The transaction hash to fetch the transaction details for.
+   * @returns {Promise<ApiResponse>} - A promise that resolves to the transaction data.
+   * @throws {Error} - Throws an error if the request fails.
+   *
+   * @example
+   * const transaction = await Transaction.getTransactionByHash('0x...');
+   * console.log(transaction);
+   */
+  public static async getTransactionByHash(txHash: string): Promise<ApiResponse> {
+    const chainId = Client.getChainId();
+    const apiKey = Client.getApiKey();
+    return await getTransactionByHash(chainId, txHash, apiKey);
+  }
+
+  /**
+   * Fetches the status of a transaction by its hash.
+   *
+   * @async
+   * @param {string} txHash - The transaction hash to check the status for.
+   * @returns {Promise<ApiResponse>} - A promise that resolves to the transaction status.
+   * @throws {Error} - Throws an error if the request fails.
+   *
+   * @example
+   * const status = await Transaction.getTransactionStatus('0x...');
+   * console.log(status);
+   */
+  public static async getTransactionStatus(txHash: string): Promise<ApiResponse> {
+    const chainId = Client.getChainId();
+    const apiKey = Client.getApiKey();
+    return await getTransactionStatus(chainId, txHash, apiKey);
+  }
+}
