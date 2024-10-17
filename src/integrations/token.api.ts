@@ -1,4 +1,4 @@
-import { ApiResponse, Method } from "./api.interfaces.js";
+import { ApiResponse, Method } from './api.interfaces.js';
 
 /**
  * Fetches the native token balance of a specific address on a blockchain.
@@ -15,25 +15,20 @@ import { ApiResponse, Method } from "./api.interfaces.js";
  * const balance = await getNativeTokenBalance('282', '0x..', 'your-api-key');
  * console.log(balance);
  */
-export const getNativeTokenBalance = async (
-  chainId: string,
-  address: string,
-  apiKey: string
-): Promise<ApiResponse> => {
+export const getNativeTokenBalance = async (chainId: string, address: string, apiKey: string): Promise<ApiResponse> => {
   const url = `https://developer-platform-api.crypto.com/api/v1/cdc-developer-platform/token/${chainId}/native-token-balance?address=${address}&apiKey=${apiKey}`;
 
   try {
     const response = await fetch(url, {
       method: Method.GET,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
     if (!response.ok) {
       const errorBody = await response.json();
-      const serverErrorMessage =
-        errorBody.error || `HTTP error! status: ${response.status}`;
+      const serverErrorMessage = errorBody.error || `HTTP error! status: ${response.status}`;
       throw new Error(serverErrorMessage);
     }
 
@@ -66,7 +61,7 @@ export const getERC20TokenBalance = async (
   chainId: string,
   address: string,
   contractAddress: string,
-  blockHeight: string = "latest",
+  blockHeight: string = 'latest',
   apiKey: string
 ): Promise<ApiResponse> => {
   const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/token/${chainId}/erc20-token-balance?address=${address}&contractAddress=${contractAddress}&blockHeight=${blockHeight}&apiKey=${apiKey}`;
@@ -75,14 +70,13 @@ export const getERC20TokenBalance = async (
     const response = await fetch(url, {
       method: Method.GET,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
     if (!response.ok) {
       const errorBody = await response.json();
-      const serverErrorMessage =
-        errorBody.error || `HTTP error! status: ${response.status}`;
+      const serverErrorMessage = errorBody.error || `HTTP error! status: ${response.status}`;
       throw new Error(serverErrorMessage);
     }
 
@@ -125,15 +119,14 @@ export const transferToken = async (
     const response = await fetch(url, {
       method: Method.POST,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ ...payload, provider }),
     });
 
     if (!response.ok) {
       const errorBody = await response.json();
-      const serverErrorMessage =
-        errorBody.error || `HTTP error! status: ${response.status}`;
+      const serverErrorMessage = errorBody.error || `HTTP error! status: ${response.status}`;
       throw new Error(serverErrorMessage);
     }
 
@@ -175,15 +168,14 @@ export const wrapToken = async (
     const response = await fetch(url, {
       method: Method.POST,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ ...payload, provider }),
     });
 
     if (!response.ok) {
       const errorBody = await response.json();
-      const serverErrorMessage =
-        errorBody.error || `HTTP error! status: ${response.status}`;
+      const serverErrorMessage = errorBody.error || `HTTP error! status: ${response.status}`;
       throw new Error(serverErrorMessage);
     }
 
@@ -225,15 +217,14 @@ export const swapToken = async (
     const response = await fetch(url, {
       method: Method.POST,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ ...payload, provider }),
     });
 
     if (!response.ok) {
       const errorBody = await response.json();
-      const serverErrorMessage =
-        errorBody.error || `HTTP error! status: ${response.status}`;
+      const serverErrorMessage = errorBody.error || `HTTP error! status: ${response.status}`;
       throw new Error(serverErrorMessage);
     }
 

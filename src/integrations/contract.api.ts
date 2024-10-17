@@ -1,4 +1,4 @@
-import { ApiResponse, Method } from "./api.interfaces.js";
+import { ApiResponse, Method } from './api.interfaces.js';
 
 /**
  * Fetches the ABI (Application Binary Interface) of a specific contract by its address on a particular blockchain network.
@@ -26,14 +26,13 @@ export const getContractABI = async (
     const response = await fetch(url, {
       method: Method.GET,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
     if (!response.ok) {
       const errorBody = await response.json();
-      const serverErrorMessage =
-        errorBody.error || `HTTP error! status: ${response.status}`;
+      const serverErrorMessage = errorBody.error || `HTTP error! status: ${response.status}`;
       throw new Error(serverErrorMessage);
     }
 

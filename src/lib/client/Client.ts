@@ -1,4 +1,4 @@
-import { CronosEvm, CronosZkEvm } from "./interfaces/chain.interfaces.js";
+import { CronosEvm, CronosZkEvm } from './interfaces/chain.interfaces.js';
 
 /**
  * Configuration parameters for setting up the Client.
@@ -89,9 +89,7 @@ export class Client {
    */
   public static getApiKey(): string {
     if (!this.apiKey) {
-      throw new Error(
-        "API key not configured. Call Client.configure({ apiKey: 'your-api-key' }) first."
-      );
+      throw new Error("API key not configured. Call Client.configure({ apiKey: 'your-api-key' }) first.");
     }
     return this.apiKey;
   }
@@ -122,9 +120,7 @@ export class Client {
    */
   public static getChainId(): string {
     if (!this.chainId) {
-      throw new Error(
-        "Chain ID not configured. Call Client.configure({ chain: CronosZkEvm.Testnet }) first."
-      );
+      throw new Error('Chain ID not configured. Call Client.configure({ chain: CronosZkEvm.Testnet }) first.');
     }
     return this.chainId;
   }

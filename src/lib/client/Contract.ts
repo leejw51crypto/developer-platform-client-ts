@@ -1,6 +1,6 @@
-import { ApiResponse } from "../../integrations/api.interfaces.js";
-import { getContractABI } from "../../integrations/contract.api.js";
-import { Client } from "./Client.js";
+import { ApiResponse } from '../../integrations/api.interfaces.js';
+import { getContractABI } from '../../integrations/contract.api.js';
+import { Client } from './Client.js';
 
 /**
  * Contract class handles interactions related to smart contracts, such as fetching the contract's ABI (Application Binary Interface).
@@ -23,9 +23,7 @@ export class Contract {
    * const abi = await contract.getContractABI('1', '0x..');
    * console.log(abi);
    */
-  public static async getContractABI(
-    contractAddress: string
-  ): Promise<ApiResponse> {
+  public static async getContractABI(contractAddress: string): Promise<ApiResponse> {
     const chainId = Client.getChainId();
     const apiKey = Client.getApiKey();
     return await getContractABI(chainId, contractAddress, apiKey);

@@ -1,4 +1,4 @@
-import { ApiResponse, Method } from "./api.interfaces.js";
+import { ApiResponse, Method } from './api.interfaces.js';
 
 /**
  * Fetches a block by tag or block number.
@@ -18,7 +18,7 @@ import { ApiResponse, Method } from "./api.interfaces.js";
 export const getBlockByTag = async (
   chainId: string,
   blockTag: string,
-  txDetail: string = "",
+  txDetail: string = '',
   apiKey: string
 ): Promise<ApiResponse> => {
   const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/block/${chainId}/block-tag?blockTag=${blockTag}&txDetail=${txDetail}&apiKey=${apiKey}`;
@@ -27,14 +27,13 @@ export const getBlockByTag = async (
     const response = await fetch(url, {
       method: Method.GET,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
     if (!response.ok) {
       const errorBody = await response.json();
-      const serverErrorMessage =
-        errorBody.error || `HTTP error! status: ${response.status}`;
+      const serverErrorMessage = errorBody.error || `HTTP error! status: ${response.status}`;
       throw new Error(serverErrorMessage);
     }
 

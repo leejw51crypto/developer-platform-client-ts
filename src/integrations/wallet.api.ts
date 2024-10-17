@@ -1,4 +1,4 @@
-import { ApiResponse, Method } from "./api.interfaces.js";
+import { ApiResponse, Method } from './api.interfaces.js';
 
 /**
  * Creates a new wallet using the API.
@@ -19,14 +19,13 @@ export const createWallet = async (): Promise<ApiResponse> => {
     const response = await fetch(url, {
       method: Method.POST,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
     if (!response.ok) {
       const errorBody = await response.json();
-      const serverErrorMessage =
-        errorBody.error || `HTTP error! status: ${response.status}`;
+      const serverErrorMessage = errorBody.error || `HTTP error! status: ${response.status}`;
       throw new Error(serverErrorMessage);
     }
 
@@ -51,24 +50,20 @@ export const createWallet = async (): Promise<ApiResponse> => {
  * const balance = await getBalance('1', '0x...');
  * console.log(balance);
  */
-export const getBalance = async (
-  chainId: string,
-  address: string
-): Promise<ApiResponse> => {
+export const getBalance = async (chainId: string, address: string): Promise<ApiResponse> => {
   const url = `https://developer-platform-api.crypto.com/api/v1/cdc-developer-platform/wallet/${chainId}/balance?address=${address}`;
 
   try {
     const response = await fetch(url, {
       method: Method.GET,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
     if (!response.ok) {
       const errorBody = await response.json();
-      const serverErrorMessage =
-        errorBody.error || `HTTP error! status: ${response.status}`;
+      const serverErrorMessage = errorBody.error || `HTTP error! status: ${response.status}`;
       throw new Error(serverErrorMessage);
     }
 
