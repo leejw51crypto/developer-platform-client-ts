@@ -1,4 +1,4 @@
-import { ApiResponse, Method } from './api.interfaces.js';
+import { ApiResponse, Method } from "./api.interfaces.js";
 
 /**
  * Fetches transactions for a specific wallet address.
@@ -19,31 +19,36 @@ import { ApiResponse, Method } from './api.interfaces.js';
 export const getTransactionsByAddress = async (
   chainId: string,
   address: string,
-  session: string = '',
-  limit: string = '20',
+  session: string = "",
+  limit: string = "20",
   apiKey: string
 ): Promise<ApiResponse> => {
-  const url = `http://localhost:8000/api/v1/cdc-developer-platform/transaction/${chainId}/address?address=${address}&session=${session}&limit=${limit}&apiKey=${apiKey}`;
+  const url = `https://developer-platform-api.crypto.com/api/v1/cdc-developer-platform/transaction/${chainId}/address?address=${address}&session=${session}&limit=${limit}&apiKey=${apiKey}`;
 
   try {
     const response = await fetch(url, {
       method: Method.GET,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
     if (!response.ok) {
       const errorBody = await response.json();
-      const serverErrorMessage = errorBody.error || `HTTP error! status: ${response.status}`;
+      const serverErrorMessage =
+        errorBody.error || `HTTP error! status: ${response.status}`;
       throw new Error(serverErrorMessage);
     }
 
     return await response.json();
   } catch (e) {
     const error = e as Error;
-    console.error(`[transactionApi/getTransactionsByAddress] - ${error.message}`);
-    throw new Error(`Failed to fetch transactions by address: ${error.message}`);
+    console.error(
+      `[transactionApi/getTransactionsByAddress] - ${error.message}`
+    );
+    throw new Error(
+      `Failed to fetch transactions by address: ${error.message}`
+    );
   }
 };
 
@@ -61,20 +66,25 @@ export const getTransactionsByAddress = async (
  * const transactionData = await getTransactionByHash('1', '0x...', 'your-api-key');
  * console.log(transactionData);
  */
-export const getTransactionByHash = async (chainId: string, txHash: string, apiKey: string): Promise<ApiResponse> => {
-  const url = `http://localhost:8000/v1/cdc-developer-platform/transaction/${chainId}/tx-hash?txHash=${txHash}&apiKey=${apiKey}`;
+export const getTransactionByHash = async (
+  chainId: string,
+  txHash: string,
+  apiKey: string
+): Promise<ApiResponse> => {
+  const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/transaction/${chainId}/tx-hash?txHash=${txHash}&apiKey=${apiKey}`;
 
   try {
     const response = await fetch(url, {
       method: Method.GET,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
     if (!response.ok) {
       const errorBody = await response.json();
-      const serverErrorMessage = errorBody.error || `HTTP error! status: ${response.status}`;
+      const serverErrorMessage =
+        errorBody.error || `HTTP error! status: ${response.status}`;
       throw new Error(serverErrorMessage);
     }
 
@@ -100,20 +110,25 @@ export const getTransactionByHash = async (chainId: string, txHash: string, apiK
  * const transactionStatus = await getTransactionStatus('1', '0x...', 'your-api-key');
  * console.log(transactionStatus);
  */
-export const getTransactionStatus = async (chainId: string, txHash: string, apiKey: string): Promise<ApiResponse> => {
-  const url = `http://localhost:8000/v1/cdc-developer-platform/transaction/${chainId}/status?txHash=${txHash}&apiKey=${apiKey}`;
+export const getTransactionStatus = async (
+  chainId: string,
+  txHash: string,
+  apiKey: string
+): Promise<ApiResponse> => {
+  const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/transaction/${chainId}/status?txHash=${txHash}&apiKey=${apiKey}`;
 
   try {
     const response = await fetch(url, {
       method: Method.GET,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
     if (!response.ok) {
       const errorBody = await response.json();
-      const serverErrorMessage = errorBody.error || `HTTP error! status: ${response.status}`;
+      const serverErrorMessage =
+        errorBody.error || `HTTP error! status: ${response.status}`;
       throw new Error(serverErrorMessage);
     }
 
