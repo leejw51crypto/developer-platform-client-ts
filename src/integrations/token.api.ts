@@ -108,10 +108,9 @@ export const transferToken = async (
   payload: {
     to: string;
     amount: number;
-    contractAddress?: string;
-    provider?: string;
+    contractAddress?: string; // if not provided, this method initiates a native token transfer.
   },
-  provider?: string
+  provider: string
 ): Promise<ApiResponse> => {
   const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/token/${chainId}/transfer`;
 
@@ -160,7 +159,7 @@ export const wrapToken = async (
     fromContractAddress: string;
     toContractAddress: string;
   },
-  provider?: string
+  provider: string
 ): Promise<ApiResponse> => {
   const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/transaction/${chainId}/wrap`;
 
@@ -209,7 +208,7 @@ export const swapToken = async (
     fromContractAddress: string;
     toContractAddress: string;
   },
-  provider?: string
+  provider: string
 ): Promise<ApiResponse> => {
   const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/transaction/${chainId}/swap`;
 
