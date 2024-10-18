@@ -2,7 +2,7 @@
 
 The **Crypto.com Developer Platform Client.ts** is a TypeScript/JavaScript SDK designed to interact seamlessly with the Crypto.com Developer Platform Service API. This client library simplifies interactions with the Cronos blockchain, supporting native tokens, ERC20 tokens, smart contracts, transactions, blocks, and wallets.
 
-![npm](https://img.shields.io/npm/v/@crypto.com/developer-platform-client-ts)
+![npm](https://img.shields.io/npm/v/@crypto.com/developer-platform-client)
 
 ## Features
 
@@ -18,7 +18,7 @@ The **Crypto.com Developer Platform Client.ts** is a TypeScript/JavaScript SDK d
 To install the package, run the following command in your project directory:
 
 ```bash
-npm install developer-platform-client-ts
+npm install @crypto.com/developer-platform-client
 ```
 
 ## Usage
@@ -30,12 +30,12 @@ Here’s how you can use the **Crypto.com Developer Platform Client.ts** in your
 First, configure the client with your API key and desired blockchain network (Cronos EVM or Cronos ZK EVM):
 
 ```ts
-import { Client, CronosZkEvm } from "developer-platform-client-ts";
+import { Client, CronosZkEvm } from '@crypto.com/developer-platform-client';
 
 Client.init({
   chain: CronosZkEvm.Testnet, // Or CronosEvm.Mainnet for mainnet
-  apiKey: "YOUR_API_KEY", // Explorer API
-  provider: "https://provider-url.com", // Optional provider URL for signing
+  apiKey: 'YOUR_API_KEY', // Explorer API
+  provider: 'https://provider-url.com', // Optional provider URL for signing
 });
 ```
 
@@ -53,7 +53,7 @@ console.log(wallet);
 - **Get Wallet Balance**:
 
 ```ts
-const balance = await Wallet.balance("0xYourWalletAddress");
+const balance = await Wallet.balance('0xYourWalletAddress');
 console.log(balance);
 ```
 
@@ -62,17 +62,14 @@ console.log(balance);
 - **Fetch Native Token Balance**:
 
 ```ts
-const nativeBalance = await Token.getNativeTokenBalance("0xYourWalletAddress");
+const nativeBalance = await Token.getNativeTokenBalance('0xYourWalletAddress');
 console.log(nativeBalance);
 ```
 
 - **Fetch ERC20 Token Balance**:
 
 ```ts
-const erc20Balance = await Token.getERC20TokenBalance(
-  "0xYourWalletAddress",
-  "0xErc20ContractAddress"
-);
+const erc20Balance = await Token.getERC20TokenBalance('0xYourWalletAddress', '0xErc20ContractAddress');
 console.log(erc20Balance);
 ```
 
@@ -80,7 +77,7 @@ console.log(erc20Balance);
 
 ```ts
 const transferResult = await Token.transfer({
-  to: "0xRecipientAddress",
+  to: '0xRecipientAddress',
   amount: 10, // Amount of tokens to transfer
 });
 console.log(transferResult);
@@ -90,8 +87,8 @@ console.log(transferResult);
 
 ```ts
 const wrapResult = await Token.wrap({
-  fromContractAddress: "0xOriginalTokenAddress",
-  toContractAddress: "0xWrappedTokenAddress",
+  fromContractAddress: '0xOriginalTokenAddress',
+  toContractAddress: '0xWrappedTokenAddress',
   amount: 10,
 });
 console.log(wrapResult);
@@ -101,8 +98,8 @@ console.log(wrapResult);
 
 ```ts
 const swapResult = await Token.swap({
-  fromContractAddress: "0xOriginalTokenAddress",
-  toContractAddress: "0xSwappedTokenAddress",
+  fromContractAddress: '0xOriginalTokenAddress',
+  toContractAddress: '0xSwappedTokenAddress',
   amount: 10,
 });
 console.log(swapResult);
@@ -113,23 +110,21 @@ console.log(swapResult);
 - **Fetch Transactions by Address**:
 
 ```ts
-const transactions = await Transaction.getTransactionsByAddress(
-  "0xYourWalletAddress"
-);
+const transactions = await Transaction.getTransactionsByAddress('0xYourWalletAddress');
 console.log(transactions);
 ```
 
 - **Fetch Transaction by Hash**:
 
 ```ts
-const transaction = await Transaction.getTransactionByHash("0xTransactionHash");
+const transaction = await Transaction.getTransactionByHash('0xTransactionHash');
 console.log(transaction);
 ```
 
 - **Get Transaction Status**:
 
 ```ts
-const status = await Transaction.getTransactionStatus("0xTransactionHash");
+const status = await Transaction.getTransactionStatus('0xTransactionHash');
 console.log(status);
 ```
 
@@ -138,7 +133,7 @@ console.log(status);
 - **Fetch Contract ABI by Address**:
 
 ```ts
-const abi = await Contract.getContractABI("0xContractAddress");
+const abi = await Contract.getContractABI('0xContractAddress');
 console.log(abi);
 ```
 
@@ -147,7 +142,7 @@ console.log(abi);
 - **Fetch Block by Tag or Block Number**:
 
 ```ts
-const block = await Block.getBlockByTag("latest"); // Can use 'latest', 'earliest', or a specific block number
+const block = await Block.getBlockByTag('latest'); // Can use 'latest', 'earliest', or a specific block number
 console.log(block);
 ```
 
