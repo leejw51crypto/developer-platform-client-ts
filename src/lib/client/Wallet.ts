@@ -37,6 +37,7 @@ export class Wallet {
    */
   public static async balance(address: string): Promise<ApiResponse> {
     const chainId = Client.getChainId();
-    return await getBalance(chainId, address);
+    const apiKey = Client.getApiKey();
+    return await getBalance(chainId, address, apiKey);
   }
 }

@@ -43,6 +43,7 @@ export const createWallet = async (): Promise<ApiResponse> => {
  * @async
  * @param {string} chainId - The ID of the blockchain network (e.g., Ethereum, Cronos).
  * @param {string} address - The wallet address to check the balance for (e.g., 0x...).
+ * @param {string} apiKey - The API key for authentication.
  * @returns {Promise<ApiResponse>} - The native token balance of the wallet.
  * @throws {Error} Will throw an error if the fetch request fails or the server responds with an error message.
  *
@@ -50,8 +51,8 @@ export const createWallet = async (): Promise<ApiResponse> => {
  * const balance = await getBalance('1', '0x...');
  * console.log(balance);
  */
-export const getBalance = async (chainId: string, address: string): Promise<ApiResponse> => {
-  const url = `https://developer-platform-api.crypto.com/api/v1/cdc-developer-platform/wallet/${chainId}/balance?address=${address}`;
+export const getBalance = async (chainId: string, address: string, apiKey: string): Promise<ApiResponse> => {
+  const url = `https://developer-platform-api.crypto.com/api/v1/cdc-developer-platform/wallet/${chainId}/balance?address=${address}&apiKey=${apiKey}`;
 
   try {
     const response = await fetch(url, {
