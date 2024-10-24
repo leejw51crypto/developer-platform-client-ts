@@ -21,8 +21,14 @@ export const getBlockByTag = async (
   txDetail: string = '',
   apiKey: string
 ): Promise<ApiResponse> => {
-  const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/block/${chainId}/block-tag?blockTag=${blockTag}&txDetail=${txDetail}&apiKey=${apiKey}`;
-
+  console.log('********************************');
+  let currentTime = new Date().toISOString();
+  let currentLocalTime = new Date().toLocaleString();
+  console.log('getBlockByTag', chainId, blockTag, currentTime, currentLocalTime);
+  console.log('********************************');
+  
+  const url = `http://localhost:8091/api/v1/cdc-developer-platform/block/${chainId}/block-tag?blockTag=${blockTag}&txDetail=${txDetail}&apiKey=${apiKey}`;
+  
   try {
     const response = await fetch(url, {
       method: Method.GET,
