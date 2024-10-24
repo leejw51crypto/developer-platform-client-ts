@@ -1,4 +1,5 @@
 import { ApiResponse, Method } from './api.interfaces.js';
+import { BaseUrl } from './const.js';
 
 /**
  * Fetches transactions for a specific wallet address.
@@ -23,7 +24,7 @@ export const getTransactionsByAddress = async (
   limit: string = '20',
   apiKey: string
 ): Promise<ApiResponse> => {
-  const url = `https://developer-platform-api.crypto.com/api/v1/cdc-developer-platform/transaction/${chainId}/address?address=${address}&session=${session}&limit=${limit}&apiKey=${apiKey}`;
+  const url = `${BaseUrl}/api/v1/cdc-developer-platform/transaction/${chainId}/address?address=${address}&session=${session}&limit=${limit}&apiKey=${apiKey}`;
 
   try {
     const response = await fetch(url, {
@@ -62,7 +63,7 @@ export const getTransactionsByAddress = async (
  * console.log(transactionData);
  */
 export const getTransactionByHash = async (chainId: string, txHash: string, apiKey: string): Promise<ApiResponse> => {
-  const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/transaction/${chainId}/tx-hash?txHash=${txHash}&apiKey=${apiKey}`;
+  const url = `${BaseUrl}/v1/cdc-developer-platform/transaction/${chainId}/tx-hash?txHash=${txHash}&apiKey=${apiKey}`;
 
   try {
     const response = await fetch(url, {
@@ -101,7 +102,7 @@ export const getTransactionByHash = async (chainId: string, txHash: string, apiK
  * console.log(transactionStatus);
  */
 export const getTransactionStatus = async (chainId: string, txHash: string, apiKey: string): Promise<ApiResponse> => {
-  const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/transaction/${chainId}/status?txHash=${txHash}&apiKey=${apiKey}`;
+  const url = `${BaseUrl}/v1/cdc-developer-platform/transaction/${chainId}/status?txHash=${txHash}&apiKey=${apiKey}`;
 
   try {
     const response = await fetch(url, {

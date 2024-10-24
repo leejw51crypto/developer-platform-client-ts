@@ -1,5 +1,5 @@
 import { ApiResponse, Method } from './api.interfaces.js';
-
+import { BaseUrl } from './const.js';
 /**
  * Fetches a block by tag or block number.
  *
@@ -14,15 +14,21 @@ import { ApiResponse, Method } from './api.interfaces.js';
  * @example
  * const blockData = await getBlockByTag('1', 'latest', '', 'your-api-key');
  * console.log(blockData);
- */
+ */ 
 export const getBlockByTag = async (
   chainId: string,
-  blockTag: string,
+  blockTag: string, 
   txDetail: string = '',
   apiKey: string
 ): Promise<ApiResponse> => {
-  const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/block/${chainId}/block-tag?blockTag=${blockTag}&txDetail=${txDetail}&apiKey=${apiKey}`;
-
+  console.log('********************************');
+  let currentTime = new Date().toISOString();
+  let currentLocalTime = new Date().toLocaleString();
+  console.log('getBlockByTag', chainId, blockTag, currentTime, currentLocalTime);
+  console.log('********************************');
+  
+  const url = `${BaseUrl}/v1/cdc-developer-platform/block/${chainId}/block-tag?blockTag=${blockTag}&txDetail=${txDetail}&apiKey=${apiKey}`;
+  
   try {
     const response = await fetch(url, {
       method: Method.GET,

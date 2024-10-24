@@ -1,4 +1,5 @@
 import { ApiResponse, Method } from './api.interfaces.js';
+import { BaseUrl } from './const.js';
 
 /**
  * Creates a new wallet using the API.
@@ -13,7 +14,7 @@ import { ApiResponse, Method } from './api.interfaces.js';
  * console.log(newWallet);
  */
 export const createWallet = async (): Promise<ApiResponse> => {
-  const url = `https://developer-platform-api.crypto.com/api/v1/cdc-developer-platform/wallet`;
+  const url = `${BaseUrl}/v1/cdc-developer-platform/wallet`;
 
   try {
     const response = await fetch(url, {
@@ -51,7 +52,7 @@ export const createWallet = async (): Promise<ApiResponse> => {
  * console.log(balance);
  */
 export const getBalance = async (chainId: string, address: string): Promise<ApiResponse> => {
-  const url = `https://developer-platform-api.crypto.com/api/v1/cdc-developer-platform/wallet/${chainId}/balance?address=${address}`;
+  const url = `${BaseUrl}/api/v1/cdc-developer-platform/wallet/${chainId}/balance?address=${address}`;
 
   try {
     const response = await fetch(url, {

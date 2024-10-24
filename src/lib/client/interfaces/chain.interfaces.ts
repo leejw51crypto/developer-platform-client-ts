@@ -49,5 +49,5 @@ export enum CronosZkEvm {
    *
    * @type {string}
    */
-  Testnet = '282',
+  Testnet = '240',
 }
