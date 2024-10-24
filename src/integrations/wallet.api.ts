@@ -14,7 +14,7 @@ import { BaseUrl } from './const.js';
  * console.log(newWallet);
  */
 export const createWallet = async (): Promise<ApiResponse> => {
-  const url = `${BaseUrl}/api/v1/cdc-developer-platform/wallet`;
+  const url = `${BaseUrl}/v1/cdc-developer-platform/wallet`;
 
   try {
     const response = await fetch(url, {
