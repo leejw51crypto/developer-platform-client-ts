@@ -1,4 +1,5 @@
 import { ApiResponse, Method } from './api.interfaces.js';
+import { BaseUrl } from './const.js';
 
 /**
  * Fetches the ABI (Application Binary Interface) of a specific contract by its address on a particular blockchain network.
@@ -12,7 +13,7 @@ import { ApiResponse, Method } from './api.interfaces.js';
  * @throws {Error} Will throw an error if the fetch request fails or the server responds with an error message.
  *
  * @example
- * const abi = await getContractABI('1', '0x...');
+ * const abi = await getContractABI('1', '0x...', 'your-api-key');
  * console.log(abi);
  */
 export const getContractABI = async (
@@ -20,7 +21,13 @@ export const getContractABI = async (
   contractAddress: string,
   apiKey: string
 ): Promise<ApiResponse> => {
-  const url = `https://developer-platform-api.crypto.com/api/v1/cdc-developer-platform/contract/${chainId}/contract-abi?contractAddress=${contractAddress}&apiKey=${apiKey}`;
+  console.log('********************************');
+  let currentTime = new Date().toISOString();
+  let currentLocalTime = new Date().toLocaleString();
+  console.log('getContractABI', chainId, contractAddress, currentTime, currentLocalTime);
+  console.log('********************************');
+
+  const url = `${BaseUrl}/v1/cdc-developer-platform/contract/${chainId}/contract-abi?contractAddress=${contractAddress}&apiKey=${apiKey}`;
 
   try {
     const response = await fetch(url, {
