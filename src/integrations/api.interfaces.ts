@@ -18,9 +18,9 @@
  *   },
  * };
  */
-export interface ApiResponse {
+export interface ApiResponse<T> {
   status: Status;
-  data: object;
+  data: T;
 }
 
 /**

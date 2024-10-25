@@ -1,10 +1,15 @@
 import { ApiResponse } from '../../integrations/api.interfaces.js';
 import {
-  getTransactionsByAddress,
   getTransactionByHash,
+  getTransactionsByAddress,
   getTransactionStatus,
 } from '../../integrations/transaction.api.js';
 import { Client } from './Client.js';
+import {
+  GetTransactionByHashData,
+  GetTransactionsByAddressData,
+  GetTransactionStatusData,
+} from './interfaces/transaction.interfaces.js';
 
 /**
  * Transaction class handles operations related to fetching transaction data,
@@ -20,7 +25,7 @@ export class Transaction {
    * @param {string} address - The wallet address to fetch transactions for.
    * @param {string} [session] - Optional. Session token for pagination (default is an empty string).
    * @param {string} [limit] - Optional. Limit for the number of transactions to fetch (default is 20).
-   * @returns {Promise<ApiResponse>} - A promise that resolves to the transaction data for the specified address.
+   * @returns {Promise<ApiResponse<GetTransactionsByAddressData>>} - A promise that resolves to the transaction data for the specified address.
    * @throws {Error} - Throws an error if the request fails.
    *
    * @example
@@ -31,7 +36,7 @@ export class Transaction {
     address: string,
     session?: string,
     limit?: string
-  ): Promise<ApiResponse> {
+  ): Promise<ApiResponse<GetTransactionsByAddressData>> {
     const chainId = Client.getChainId();
     const apiKey = Client.getApiKey();
     return await getTransactionsByAddress(chainId, address, session, limit, apiKey);
@@ -42,14 +47,14 @@ export class Transaction {
    *
    * @async
    * @param {string} txHash - The transaction hash to fetch the transaction details for.
-   * @returns {Promise<ApiResponse>} - A promise that resolves to the transaction data.
+   * @returns {Promise<ApiResponse<GetTransactionByHashData>>} - A promise that resolves to the transaction data.
    * @throws {Error} - Throws an error if the request fails.
    *
    * @example
    * const transaction = await Transaction.getTransactionByHash('0x...');
    * console.log(transaction);
    */
-  public static async getTransactionByHash(txHash: string): Promise<ApiResponse> {
+  public static async getTransactionByHash(txHash: string): Promise<ApiResponse<GetTransactionByHashData>> {
     const chainId = Client.getChainId();
     const apiKey = Client.getApiKey();
     return await getTransactionByHash(chainId, txHash, apiKey);
@@ -60,14 +65,14 @@ export class Transaction {
    *
    * @async
    * @param {string} txHash - The transaction hash to check the status for.
-   * @returns {Promise<ApiResponse>} - A promise that resolves to the transaction status.
+   * @returns {Promise<ApiResponse<GetTransactionStatusData>>} - A promise that resolves to the transaction status.
    * @throws {Error} - Throws an error if the request fails.
    *
    * @example
    * const status = await Transaction.getTransactionStatus('0x...');
    * console.log(status);
    */
-  public static async getTransactionStatus(txHash: string): Promise<ApiResponse> {
+  public static async getTransactionStatus(txHash: string): Promise<ApiResponse<GetTransactionStatusData>> {
     const chainId = Client.getChainId();
     const apiKey = Client.getApiKey();
     return await getTransactionStatus(chainId, txHash, apiKey);
