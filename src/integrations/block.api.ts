@@ -1,3 +1,4 @@
+import { GetBlockByTag } from '../lib/client/interfaces/block.interfaces.js';
 import { ApiResponse, Method } from './api.interfaces.js';
 
 /**
@@ -8,7 +9,7 @@ import { ApiResponse, Method } from './api.interfaces.js';
  * @param {string} blockTag - The block tag (e.g., 'latest').
  * @param {string} [txDetail] - Optional. Include detailed transaction data.
  * @param {string} apiKey - The API key for authentication.
- * @returns {Promise<ApiResponse>} - The block data.
+ * @returns {Promise<ApiResponse<GetBlockByTag>>} - The block data.
  * @throws {Error} Will throw an error if the fetch request fails or the server responds with an error message.
  *
  * @example
@@ -20,7 +21,7 @@ export const getBlockByTag = async (
   blockTag: string,
   txDetail: string = '',
   apiKey: string
-): Promise<ApiResponse> => {
+): Promise<ApiResponse<GetBlockByTag>> => {
   const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/block/${chainId}/block-tag?blockTag=${blockTag}&txDetail=${txDetail}&apiKey=${apiKey}`;
 
   try {

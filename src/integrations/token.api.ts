@@ -1,3 +1,6 @@
+import { TokenBalance } from '../lib/client/interfaces/explorer.interfaces.js';
+import { Balance } from '../lib/client/interfaces/token.interfaces.js';
+import { MagicLinkData } from '../lib/client/interfaces/transaction.interfaces.js';
 import { ApiResponse, Method } from './api.interfaces.js';
 
 /**
@@ -8,14 +11,18 @@ import { ApiResponse, Method } from './api.interfaces.js';
  * @param {string} chainId - The ID of the blockchain network (e.g., Ethereum, Cronos).
  * @param {string} address - The wallet address to fetch the native token balance for.
  * @param {string} apiKey - The API key used for authentication with the server.
- * @returns {Promise<ApiResponse>} - A promise that resolves to the balance of the native token.
+ * @returns {Promise<ApiResponse<Balance>>} - A promise that resolves to the balance of the native token.
  * @throws {Error} Will throw an error if the fetch request fails or the server responds with an error message.
  *
  * @example
  * const balance = await getNativeTokenBalance('282', '0x..', 'your-api-key');
  * console.log(balance);
  */
-export const getNativeTokenBalance = async (chainId: string, address: string, apiKey: string): Promise<ApiResponse> => {
+export const getNativeTokenBalance = async (
+  chainId: string,
+  address: string,
+  apiKey: string
+): Promise<ApiResponse<Balance>> => {
   const url = `https://developer-platform-api.crypto.com/api/v1/cdc-developer-platform/token/${chainId}/native-token-balance?address=${address}&apiKey=${apiKey}`;
 
   try {
@@ -50,7 +57,7 @@ export const getNativeTokenBalance = async (chainId: string, address: string, ap
  * @param {string} contractAddress - The contract address of the ERC20 token.
  * @param {string} [blockHeight='latest'] - Optional. The block height to query (default is 'latest').
  * @param {string} apiKey - The API key used for authentication with the server.
- * @returns {Promise<ApiResponse>} - A promise that resolves to the balance of the ERC20 token.
+ * @returns {Promise<ApiResponse<TokenBalance>>} - A promise that resolves to the balance of the ERC20 token.
  * @throws {Error} Will throw an error if the fetch request fails or the server responds with an error message.
  *
  * @example
@@ -63,7 +70,7 @@ export const getERC20TokenBalance = async (
   contractAddress: string,
   blockHeight: string = 'latest',
   apiKey: string
-): Promise<ApiResponse> => {
+): Promise<ApiResponse<TokenBalance>> => {
   const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/token/${chainId}/erc20-token-balance?address=${address}&contractAddress=${contractAddress}&blockHeight=${blockHeight}&apiKey=${apiKey}`;
 
   try {
@@ -96,7 +103,7 @@ export const getERC20TokenBalance = async (
  * @param {string} chainId - The ID of the blockchain network.
  * @param {object} payload - The transaction payload including 'to' address, 'amount', and optional 'contractAddress'.
  * @param {string} [provider] - Optional. The provider URL for the blockchain network.
- * @returns {Promise<ApiResponse>} - A promise that resolves to the result of the transaction.
+ * @returns {Promise<ApiResponse<MagicLinkData>>} - A promise that resolves to the result of the transaction.
  * @throws {Error} Will throw an error if the transaction fails or the server responds with an error message.
  *
  * @example
@@ -111,7 +118,7 @@ export const transferToken = async (
     contractAddress?: string; // if not provided, this method initiates a native token transfer.
   },
   provider: string
-): Promise<ApiResponse> => {
+): Promise<ApiResponse<MagicLinkData>> => {
   const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/token/${chainId}/transfer`;
 
   try {
@@ -145,7 +152,7 @@ export const transferToken = async (
  * @param {string} chainId - The ID of the blockchain network.
  * @param {object} payload - The transaction payload including 'amount', 'fromContractAddress', and 'toContractAddress'.
  * @param {string} [provider] - Optional. The provider URL for the blockchain network.
- * @returns {Promise<ApiResponse>} - A promise that resolves to the result of the transaction.
+ * @returns {Promise<ApiResponse<MagicLinkData>} - A promise that resolves to the result of the transaction.
  * @throws {Error} Will throw an error if the transaction fails or the server responds with an error message.
  *
  * @example
@@ -160,7 +167,7 @@ export const wrapToken = async (
     toContractAddress: string;
   },
   provider: string
-): Promise<ApiResponse> => {
+): Promise<ApiResponse<MagicLinkData>> => {
   const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/transaction/${chainId}/wrap`;
 
   try {
@@ -194,7 +201,7 @@ export const wrapToken = async (
  * @param {string} chainId - The ID of the blockchain network.
  * @param {object} payload - The transaction payload including 'amount', 'fromContractAddress', and 'toContractAddress'.
  * @param {string} [provider] - Optional. The provider URL for the blockchain network.
- * @returns {Promise<ApiResponse>} - A promise that resolves to the result of the transaction.
+ * @returns {Promise<ApiResponse<MagicLinkData>>} - A promise that resolves to the result of the transaction.
  * @throws {Error} Will throw an error if the transaction fails or the server responds with an error message.
  *
  * @example
@@ -209,7 +216,7 @@ export const swapToken = async (
     toContractAddress: string;
   },
   provider: string
-): Promise<ApiResponse> => {
+): Promise<ApiResponse<MagicLinkData>> => {
   const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/transaction/${chainId}/swap`;
 
   try {

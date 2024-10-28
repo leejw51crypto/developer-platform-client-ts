@@ -1,12 +1,15 @@
 import { ApiResponse } from '../../integrations/api.interfaces.js';
 import {
-  getNativeTokenBalance,
   getERC20TokenBalance,
-  transferToken,
+  getNativeTokenBalance,
   swapToken,
+  transferToken,
   wrapToken,
 } from '../../integrations/token.api.js';
 import { Client } from './Client.js';
+import { TokenBalance } from './interfaces/explorer.interfaces.js';
+import { Balance } from './interfaces/token.interfaces.js';
+import { MagicLinkData } from './interfaces/transaction.interfaces.js';
 
 /**
  * Token class handles operations related to native tokens and ERC20 tokens,
@@ -20,14 +23,14 @@ export class Token {
    *
    * @async
    * @param {string} address - The wallet address to check the native token balance for.
-   * @returns {Promise<ApiResponse>} - A promise that resolves to the balance of the native token.
+   * @returns {Promise<ApiResponse<Balance>>} - A promise that resolves to the balance of the native token.
    * @throws {Error} - Throws an error if the request fails.
    *
    * @example
    * const balance = await Token.getNativeTokenBalance('0x...');
    * console.log(balance);
    */
-  public static async getNativeTokenBalance(address: string): Promise<ApiResponse> {
+  public static async getNativeTokenBalance(address: string): Promise<ApiResponse<Balance>> {
     const chainId = Client.getChainId();
     const apiKey = Client.getApiKey();
     return await getNativeTokenBalance(chainId, address, apiKey);
@@ -40,7 +43,7 @@ export class Token {
    * @param {string} address - The wallet address to check the ERC20 token balance for.
    * @param {string} contractAddress - The contract address of the ERC20 token.
    * @param {string} [blockHeight='latest'] - Optional. The block height to query, default is 'latest'.
-   * @returns {Promise<ApiResponse>} - A promise that resolves to the balance of the ERC20 token.
+   * @returns {Promise<ApiResponse<TokenBalance>>} - A promise that resolves to the balance of the ERC20 token.
    * @throws {Error} - Throws an error if the request fails.
    *
    * @example
@@ -51,7 +54,7 @@ export class Token {
     address: string,
     contractAddress: string,
     blockHeight: string = 'latest'
-  ): Promise<ApiResponse> {
+  ): Promise<ApiResponse<TokenBalance>> {
     const chainId = Client.getChainId();
     const apiKey = Client.getApiKey();
     return await getERC20TokenBalance(chainId, address, contractAddress, blockHeight, apiKey);
@@ -65,7 +68,7 @@ export class Token {
    * @param {string} payload.to - The recipient address of the transfer.
    * @param {number} payload.amount - The amount of tokens to transfer.
    * @param {string} [payload.contractAddress] - Optional. The contract address of the ERC20 token (if transferring ERC20 tokens).
-   * @returns {Promise<ApiResponse>} - A promise that resolves to the result of the transaction.
+   * @returns {Promise<ApiResponse<MagicLinkData>>} - A promise that resolves to the result of the transaction.
    * @throws {Error} - Throws an error if the request fails.
    *
    * @example
@@ -76,7 +79,7 @@ export class Token {
     to: string;
     amount: number;
     contractAddress?: string;
-  }): Promise<ApiResponse> {
+  }): Promise<ApiResponse<MagicLinkData>> {
     const chainId = Client.getChainId();
     const provider = Client.getProvider();
     return await transferToken(chainId, payload, provider);
@@ -90,7 +93,7 @@ export class Token {
    * @param {string} payload.fromContractAddress - The contract address of the token to be wrapped.
    * @param {string} payload.toContractAddress - The contract address of the token to receive.
    * @param {number} payload.amount - The amount of tokens to wrap.
-   * @returns {Promise<ApiResponse>} - A promise that resolves to the result of the wrap transaction.
+   * @returns {Promise<ApiResponse<MagicLinkData>>} - A promise that resolves to the result of the wrap transaction.
    * @throws {Error} - Throws an error if the request fails.
    *
    * @example
@@ -101,7 +104,7 @@ export class Token {
     fromContractAddress: string;
     toContractAddress: string;
     amount: number;
-  }): Promise<ApiResponse> {
+  }): Promise<ApiResponse<MagicLinkData>> {
     const chainId = Client.getChainId();
     const provider = Client.getProvider();
     return await wrapToken(chainId, payload, provider);
@@ -115,7 +118,7 @@ export class Token {
    * @param {string} payload.fromContractAddress - The contract address of the token being swapped.
    * @param {string} payload.toContractAddress - The contract address of the token to receive.
    * @param {number} payload.amount - The amount of tokens to swap.
-   * @returns {Promise<ApiResponse>} - A promise that resolves to the result of the swap transaction.
+   * @returns {Promise<ApiResponse<MagicLinkData>>} - A promise that resolves to the result of the swap transaction.
    * @throws {Error} - Throws an error if the request fails.
    *
    * @example
@@ -126,7 +129,7 @@ export class Token {
     fromContractAddress: string;
     toContractAddress: string;
     amount: number;
-  }): Promise<ApiResponse> {
+  }): Promise<ApiResponse<MagicLinkData>> {
     const chainId = Client.getChainId();
     const provider = Client.getProvider();
     return await swapToken(chainId, payload, provider);
