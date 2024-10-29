@@ -15,7 +15,7 @@ import { ApiResponse, Method } from './api.interfaces.js';
  * @throws {Error} Will throw an error if the fetch request fails or the server responds with an error message.
  *
  * @example
- * const balance = await getNativeTokenBalance('282', '0x..', 'your-api-key');
+ * const balance = await getNativeTokenBalance('240', '0x..', 'your-api-key');
  * console.log(balance);
  */
 export const getNativeTokenBalance = async (
@@ -61,7 +61,7 @@ export const getNativeTokenBalance = async (
  * @throws {Error} Will throw an error if the fetch request fails or the server responds with an error message.
  *
  * @example
- * const balance = await getERC20TokenBalance('282', '0x...', '0x...', 'latest', 'your-api-key');
+ * const balance = await getERC20TokenBalance('240', '0x...', '0x...', 'latest', 'your-api-key');
  * console.log(balance);
  */
 export const getERC20TokenBalance = async (
@@ -107,7 +107,7 @@ export const getERC20TokenBalance = async (
  * @throws {Error} Will throw an error if the transaction fails or the server responds with an error message.
  *
  * @example
- * const result = await transferToken('282', { to: '0x...', amount: 1 }, 'https://provider-url.com');
+ * const result = await transferToken('240', { to: '0x...', amount: 1 }, 'https://provider-url.com');
  * console.log(result);
  */
 export const transferToken = async (

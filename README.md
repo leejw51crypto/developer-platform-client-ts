@@ -197,7 +197,7 @@ CronosEvm.Testnet; // Chain ID: 338
 
 ```ts
 CronosZkEvm.Mainnet; // Chain ID: 388
-CronosZkEvm.Testnet; // Chain ID: 282
+CronosZkEvm.Testnet; // Chain ID: 240
 ```
 
 ## Licensing
