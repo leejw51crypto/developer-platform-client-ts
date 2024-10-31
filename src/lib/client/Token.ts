@@ -90,8 +90,6 @@ export class Token {
    *
    * @async
    * @param {object} payload - The transaction payload containing `fromContractAddress`, `toContractAddress`, and `amount`.
-   * @param {string} payload.fromContractAddress - The contract address of the token to be wrapped.
-   * @param {string} payload.toContractAddress - The contract address of the token to receive.
    * @param {number} payload.amount - The amount of tokens to wrap.
    * @returns {Promise<ApiResponse<MagicLinkData>>} - A promise that resolves to the result of the wrap transaction.
    * @throws {Error} - Throws an error if the request fails.
@@ -100,11 +98,7 @@ export class Token {
    * const wrapResult = await Token.wrapToken({ fromContractAddress: '0x123...', toContractAddress: '0x456...', amount: 1 });
    * console.log(wrapResult);
    */
-  public static async wrap(payload: {
-    fromContractAddress: string;
-    toContractAddress: string;
-    amount: number;
-  }): Promise<ApiResponse<MagicLinkData>> {
+  public static async wrap(payload: { amount: number }): Promise<ApiResponse<MagicLinkData>> {
     const chainId = Client.getChainId();
     const provider = Client.getProvider();
     return await wrapToken(chainId, payload, provider);

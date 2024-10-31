@@ -152,7 +152,7 @@ export const transferToken = async (
  * @param {string} chainId - The ID of the blockchain network.
  * @param {object} payload - The transaction payload including 'amount', 'fromContractAddress', and 'toContractAddress'.
  * @param {string} [provider] - Optional. The provider URL for the blockchain network.
- * @returns {Promise<ApiResponse<MagicLinkData>} - A promise that resolves to the result of the transaction.
+ * @returns {Promise<ApiResponse<MagicLinkData>>} - A promise that resolves to the result of the transaction.
  * @throws {Error} Will throw an error if the transaction fails or the server responds with an error message.
  *
  * @example
@@ -163,12 +163,10 @@ export const wrapToken = async (
   chainId: string,
   payload: {
     amount: number;
-    fromContractAddress: string;
-    toContractAddress: string;
   },
   provider: string
 ): Promise<ApiResponse<MagicLinkData>> => {
-  const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/transaction/${chainId}/wrap`;
+  const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/token/${chainId}/wrap`;
 
   try {
     const response = await fetch(url, {
@@ -217,7 +215,7 @@ export const swapToken = async (
   },
   provider: string
 ): Promise<ApiResponse<MagicLinkData>> => {
-  const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/transaction/${chainId}/swap`;
+  const url = `https://developer-platform-api.crypto.com/v1/cdc-developer-platform/token/${chainId}/swap`;
 
   try {
     const response = await fetch(url, {
